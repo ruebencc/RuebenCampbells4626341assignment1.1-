@@ -1,7 +1,7 @@
 ---
 title: "Assessment1.3"
 author: "Rueben Campbell s4626341"
-date: "31/05/2021"
+date: "27/05/2021"
 output: html_document
 ---
 
@@ -43,13 +43,13 @@ fastfood$salad<-as_factor(fastfood$salad)
 class(fastfood$restaurant)
 class(fastfood$salad)
 ```
-#replacement NA with 0 in the fastfood dataset.
+#replacement is not available with 0 in the fastfood dataset.
 ```{r}
 fastfood[is.na(fastfood)] <- 0
 ```
 
 #cut_number makes plus groups and includes the number of observations. 
-#Creating a new variable caloies_type then saving this to the dataset plus using the cut_number function assigning labels and making them ordered results.
+#to create a new variable caloies_type then saving this to the dataset plus using the cut_number function assigning labels and making them ordered results.
 ```{r}
 fastfood<-fastfood%>%
   mutate(calories_type=cut_number(calories,3,
@@ -69,7 +69,7 @@ fastfood<-fastfood%>%
   mutate(trans_fat_percent = trans_fat/total_fat)
 ```
 
-#creating a plot for rans_fat` in food items for each type of restaurant. Using facets and themes.
+#To create a plot for rans_fat` in the food items for the seperate types of restaurants. Using facets and themes.
 ```{r}
 
   ggplot(fastfood,aes(trans_fat_percent))+geom_bar()+facet_wrap(~restaurant)+
@@ -77,7 +77,7 @@ fastfood<-fastfood%>%
 
 ```
 
-#this is the average total_fat for each type of restaurant.
+#The average total_fat for each type of restaurant.
 
 ```{r}
 fastfood%>%
@@ -88,7 +88,7 @@ fastfood%>%
 
 ```
 
-#creating a plot that shows the comparision of different restaurants and mean(total_fat)
+#Generating a plot which shows the comparision between the different restaurants and meals (total_fat)
 ```{r}
 fastfood%>%
   group_by(restaurant)%>%

@@ -1,0 +1,70 @@
+---
+title: "Assessment 1.2"
+author: "Rueben Campbell s4626341"
+date: "25/05/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Wrangling
+# adding the required packages 
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(skimr)
+```
+# To create a variable name called fastfood to store the data
+
+```{r}
+fastfood<-read.csv('https://raw.githubusercontent.com/rfordatascience/ti
+dytuesday/master/data/2018/2018-09-
+04/fastfood_calories.csv')
+```
+
+# To display datatypes of variables in the dataset  
+```{r}
+skim(fastfood)
+```
+# To display the no observation for each restaurant
+```{r}
+table(fastfood$restaurant)
+
+```
+# To display for each resteraunt the average number of calories. 
+
+```{r}
+
+fastfood %>% group_by(restaurant) %>% summarise(average_calories=mean(calories)) %>% ungroup()
+```
+# To add a new variable to the data set name as average_calories. This is the average calories per type of restaurant 
+
+```{r}
+fastfood %>% group_by(restaurant) %>% mutate(average_calories = mean(calories)) %>% ungroup()
+```
+
+# To display the bar plot of total fat for each restaurant. in the graph a bar plot is showing the total count of tota_fat column for each resturant. the barplot is the best representation of showing the count.
+```{r}
+ggplot(fastfood,aes(restaurant,total_fat))+
+  geom_col(aes(fill=restaurant))
+
+```
+# To display the count of observation for each restaurant
+```{r}
+table(fastfood$restaurant)
+```
+# To include a variable called max_total_fat to the fastfood dataset plus the maximum value of total fat for each restaurant
+```{r}
+fastfood %>% group_by(restaurant) %>% mutate(max_total_fat = max(total_fat)) %>% ungroup()
+```
+
+# To generate a point graph for the sugar and protein variable
+```{r}
+fastfood %>% filter(restaurant=="Mcdonalds")%>% ggplot(aes(x=sugar,y=protein,color= 'red',size = 3))+
+  geom_point()
+```
+
